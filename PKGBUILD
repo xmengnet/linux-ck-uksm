@@ -74,11 +74,11 @@ _ckpatch="patch-5.12-ck${_ckpatchversion}"
 _gcc_more_v=20210412
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
-  config         # the main kernel config file
+  "config::https://raw.githubusercontent.com/antman666/auto_pkgbuild/main/config"         # the main kernel config file
   "http://ck.kolivas.org/patches/5.0/5.12/5.12-ck${_ckpatchversion}/$_ckpatch.xz"
-  0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
-  0002-drm-i915-dp-Use-slow-and-wide-link-training-for-ever.patch
-  0002-UKSM.patch
+  '0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch'
+  '0002-drm-i915-dp-Use-slow-and-wide-link-training-for-ever.patch'
+  '0002-UKSM.patch'
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
