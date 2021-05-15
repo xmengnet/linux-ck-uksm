@@ -5,7 +5,7 @@
 # Set the next two variables to ANYTHING that is not null to enable them
 
 # Tweak kernel options prior to a build via nconfig
-_makenconfig=y
+_makenconfig=
 
 # Only compile active modules to VASTLY reduce the number of modules built and
 # the build time.
@@ -73,7 +73,7 @@ options=('!strip')
 _ckpatch="patch-5.12-ck${_ckpatchversion}"
 _gcc_more_v=20210412
 source=(
-  "https://mirrors.bfsu.edu.cn/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
+  "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
   "http://ck.kolivas.org/patches/5.0/5.12/5.12-ck${_ckpatchversion}/$_ckpatch.xz"
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
@@ -147,7 +147,7 @@ prepare() {
 
   # non-interactively apply ck1 default options
   # this isn't redundant if we want a clean selection of subarch below
-  make menuconfig
+  # make menuconfig
 
   # https://github.com/graysky2/kernel_gcc_patch
   # make sure to apply after olddefconfig to allow the next section
