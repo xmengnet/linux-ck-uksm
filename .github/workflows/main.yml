@@ -1,0 +1,15 @@
+  name: Github Action Build PKGBUILD
+  on: push
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: zhullyb/build-aur-action@master
+          with:
+            repo-name: linux-ck-uksm
+        - uses: ncipollo/release-action@v1.6.1
+          with:
+            allowUpdates: true
+            tag: "5.12.4"
+            artifacts: "./*/*.zst"
+            token: ${{ secrets.auto_pkgbuild }}
