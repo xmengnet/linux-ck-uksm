@@ -21,6 +21,9 @@ jobs:
                 patch -p1 < ../patch-5.12-ck1
                 make -s kernelrelease > version
                 make -j40 all
+                cd ..
+                tar -cpvf linux-ck1-uksm.tar.xz linux-5.12.5
+                rm -rf linux-5.12.5
       - uses: ncipollo/release-action@v1.6.1
         with:
           allowUpdates: true
