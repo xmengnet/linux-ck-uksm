@@ -13,12 +13,13 @@ jobs:
                 wget -c https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.12.5.tar.xz
                 wget -c https://github.com/graysky2/kernel_gcc_patch/archive/20210412.tar.gz
                 wget -c http://ck.kolivas.org/patches/5.0/5.12/5.12-ck1/patch-5.12-ck1.xz
+                xz -d patch-5.12-ck1.xz
                 tar -xpvf linux-5.12.5.tar.xz
                 tar -xpvf 20210412.tar.gz
                 cp config linux-5.12.5/.config
                 cd linux-5.12.5
-                patch -p1 < ../*.patch
-                patch -p1 < ../kernel_gcc_patch-20210412/more-uarches-for-kernel-5.8+.patch
+                patch -p1 < "../*.patch"
+                patch -p1 < "../kernel_gcc_patch-20210412/more-uarches-for-kernel-5.8+.patch"
                 sed -i -re "s/^(.EXTRAVERSION).*$/\1 = /" "../patch-5.12-ck1"
                 patch -p1 < ../patch-5.12-ck1
                 make -s kernelrelease > version
