@@ -24,6 +24,7 @@ jobs:
                 patch -p1 < ../kernel_gcc_patch-20210412/more-uarches-for-kernel-5.8+.patch
                 sed -i -re "s/^(.EXTRAVERSION).*$/\1 = /" "../patch-5.12-ck1"
                 patch -p1 < ../patch-5.12-ck1
+                yes " " | make oldconfig
                 make -s kernelrelease > version
                 make -j40 all
                 cd ..
