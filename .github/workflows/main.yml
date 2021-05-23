@@ -7,7 +7,7 @@ jobs:
       - name: LogAllEnv
         run : printenv
       - name: prepare to build
-        run : sudo apt install wget git bc kmod libelf cpio perl tar xz -y
+        caution: wget git bc kmod libelf cpio perl tar xz
       - name: Build up linux-ck-uksm
         run : |
                 git clone https://github.com/antman666/auto_pkgbuild
