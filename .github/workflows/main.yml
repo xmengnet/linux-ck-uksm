@@ -9,7 +9,7 @@ jobs:
       - name: Build up linux-ck-uksm
         run : |
                 sudo apt update
-                sudo apt install libelf-dev flex bison -y
+                sudo apt install libelf-dev flex bison zstd -y
                 git clone https://github.com/antman666/auto_pkgbuild
                 cd auto_pkgbuild
                 rm -rf .git .github
@@ -29,7 +29,7 @@ jobs:
                 patch -p1 < ../patch-5.12-ck1
                 yes "" | make oldconfig
                 make -s kernelrelease > version
-                make -j40 all
+                make -j40
                 cd ..
                 tar -cpvf linux-ck1-uksm.tar.xz linux-5.12.5
                 rm -rf linux-5.12.5 linux-5.12.5.tar.xz
