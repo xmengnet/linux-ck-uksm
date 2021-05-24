@@ -21,8 +21,6 @@ jobs:
                 tar -xpvf 20210412.tar.gz
                 rm -rf linux-5.12.5.tar.xz 20210412.tar.gz
                 cp config linux-5.12.5/.config
-      - name: Build up linux kernel
-        run: |
                 cd linux-5.12.5
                 patch -p1 < ../0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
                 patch -p1 < ../0002-Revert-bus-mhi-core-Process-execution-environment-ch.patch
