@@ -20,7 +20,6 @@ jobs:
                 tar -xpvf linux-5.12.5.tar.xz
                 tar -xpvf 20210412.tar.gz
                 rm -rf linux-5.12.5.tar.xz 20210412.tar.gz
-                cp config linux-5.12.5/.config
                 cd linux-5.12.5
                 patch -p1 < ../0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
                 patch -p1 < ../0002-Revert-bus-mhi-core-Process-execution-environment-ch.patch
@@ -28,8 +27,10 @@ jobs:
                 patch -p1 < ../kernel_gcc_patch-20210412/more-uarches-for-kernel-5.8+.patch
                 sed -i -re "s/^(.EXTRAVERSION).*$/\1 = /" "../patch-5.12-ck1"
                 patch -p1 < ../patch-5.12-ck1
+                cp ../config .config
                 yes "" | make oldconfig
                 make -s kernelrelease > version
+                df -h
                 make -j40
                 cd ..
                 tar -cpvf linux-ck1-uksm.tar.xz linux-5.12.5
