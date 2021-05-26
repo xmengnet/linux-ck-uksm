@@ -8,8 +8,6 @@ jobs:
         runs:
           using: 'docker'
           image: 'Dockerfile'
-          args:
-            - ${{ auto_pkgbuild }}
       - uses: ncipollo/release-action@v1.6.1
         with:
           allowUpdates: true
