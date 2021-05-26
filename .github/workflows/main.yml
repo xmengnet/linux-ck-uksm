@@ -9,7 +9,7 @@ jobs:
       - name: start to build linux-ck-uksm
         uses: zhullyb/build-aur-action@mine
         with:
-          repo-name: auto_pkgbuild
+          repo-name: antman666/auto_pkgbuild
       - uses: ncipollo/release-action@v1.6.1
         with:
           allowUpdates: true
