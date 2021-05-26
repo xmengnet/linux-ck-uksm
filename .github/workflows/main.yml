@@ -6,38 +6,13 @@ jobs:
     steps:
       - name: LogAllEnv
         run : printenv
-      - name: Prepare linux-ck-uksm
-        run : |
-                sudo apt update
-                sudo apt install libelf-dev flex bison zstd -y
-                git clone https://github.com/antman666/auto_pkgbuild
-                cd auto_pkgbuild
-                rm -rf .git .github
-                wget -c https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.12.5.tar.xz
-                wget -c https://github.com/graysky2/kernel_gcc_patch/archive/20210412.tar.gz
-                wget -c http://ck.kolivas.org/patches/5.0/5.12/5.12-ck1/patch-5.12-ck1.xz
-                xz -d patch-5.12-ck1.xz
-                tar -xpvf linux-5.12.5.tar.xz
-                tar -xpvf 20210412.tar.gz
-                rm -rf linux-5.12.5.tar.xz 20210412.tar.gz
-                cd linux-5.12.5
-                patch -p1 < ../0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
-                patch -p1 < ../0002-Revert-bus-mhi-core-Process-execution-environment-ch.patch
-                patch -p1 < ../0002-UKSM.patch
-                patch -p1 < ../kernel_gcc_patch-20210412/more-uarches-for-kernel-5.8+.patch
-                sed -i -re "s/^(.EXTRAVERSION).*$/\1 = /" "../patch-5.12-ck1"
-                patch -p1 < ../patch-5.12-ck1
-                cp ../config .config
-                yes "" | make oldconfig
-                make -s kernelrelease > version
-                df -h
-                make -j40
-                cd ..
-                tar -cpvf linux-ck1-uksm.tar.xz linux-5.12.5
-                rm -rf linux-5.12.5
+      - name: start to build linux-ck-uksm
+        uses: zhullyb/build-aur-action@mine
+        with:
+          repo-name: linux-ck-uksm
       - uses: ncipollo/release-action@v1.6.1
         with:
           allowUpdates: true
           tag: "5.12.5"
-          artifacts: "./*/*.tar.xz"
+          artifacts: "./*/*.zst"
           token: ${{ secrets.auto_pkgbuild }}
