@@ -6,7 +6,7 @@ jobs:
     steps:
       - name: Build linux-ck-uksm
         run:
-          using: 'docker'
+          uses: 'docker'
           image: 'Dockerfile'
       - uses: ncipollo/release-action@v1.6.1
         with:
