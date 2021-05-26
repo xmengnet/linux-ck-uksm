@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build linux-ck-uksm
-        runs:
+        run:
           using: 'docker'
           image: 'Dockerfile'
       - uses: ncipollo/release-action@v1.6.1
