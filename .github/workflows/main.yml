@@ -9,7 +9,7 @@ jobs:
           using: 'docker'
           image: 'Dockerfile'
           args:
-            - ${{ antman666/auto_pkgbuild }}
+            - ${{ auto_pkgbuild }}
       - uses: ncipollo/release-action@v1.6.1
         with:
           allowUpdates: true
