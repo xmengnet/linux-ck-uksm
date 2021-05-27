@@ -10,7 +10,7 @@ jobs:
                 git clone https://github.com/antman666/auto_pkgbuild
                 cd auto_pkgbuild
                 docker build -t archlinux:latest .
-                docker run archlinux:latest -c /entrypoint.sh
+                docker run archlinux:latest -c '/bin/bash /entrypoint.sh'
       - uses: ncipollo/release-action@v1.6.1
         with:
           allowUpdates: true
