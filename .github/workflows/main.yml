@@ -5,9 +5,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build linux-ck-uksm
-        run:
-          uses: 'docker'
-          image: 'Dockerfile'
+        run: |
+                sudo apt update
+                sudo apt install docker-ce -y
+                git clone https://github.com/antman666/auto_pkgbuild
+                cd auto_pkgbuild
+                docker build -t archlinux:latest .
+                docker run archlinux:latest -c /entrypoint.sh
       - uses: ncipollo/release-action@v1.6.1
         with:
           allowUpdates: true
