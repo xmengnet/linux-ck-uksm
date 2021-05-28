@@ -8,6 +8,7 @@ RUN patched_glibc=glibc-linux4-2.33-5-x86_64.pkg.tar.zst && \
     bsdtar -C / -xvf "$patched_glibc"
 
 RUN sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf && pacman -Syu base-devel git --noconfirm --overwrite '*' && sed -i '/E_ROOT/d' /usr/bin/makepkg
-COPY entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
-RUN bash entrypoint.sh
+COPY entrypoint.sh /auto_pkgbuild/entrypoint.sh
+ENTRYPOINT ["/auto_pkgbuild/entrypoint.sh"]
+RUN echo 'bash /auto_pkgbuild/entrypoint' >> ~/.bash_profile
+RUN cat ~/.bash_profile
