@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build linux-ck-uksm
-        uses: antman666/build-aur-action@mine
+        uses: antman666/build-aur-action@master
         with:
           repo-name: linux-ck-uksm
       - uses: ncipollo/release-action@v1.6.1
