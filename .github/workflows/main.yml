@@ -51,7 +51,7 @@ jobs:
 
           scripts/config --disable CONFIG_KVM_WERROR
 
-          sed -i -re "s/^(.EXTRAVERSION).*$/\1 = /" "../${_ckpatch}"
+          sed -i -re "s/^(.EXTRAVERSION).*$/\1 = /" "../patch-5.12-ck1"
 
           patch -Np1 -i ../patch-5.12-ck1
 
