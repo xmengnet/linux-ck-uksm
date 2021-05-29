@@ -5,15 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build linux-ck-uksm
-        run: |
-                sudo apt update
-                git clone https://github.com/antman666/auto_pkgbuild
-                cd auto_pkgbuild
-                docker build -t archlinux:latest .
-                docker run --name archlinux -v ~/auto_pkgbuild:/auto_pkgbuild archlinux:latest
-      - uses: ncipollo/release-action@v1.6.1
+        uses: antman666/build-aur-action@master
+        with:
+          repo-name: auto_pkgbuild
+      - uses: ncipollo/release-action@v1.8.6
         with:
           allowUpdates: true
-          tag: "5.12.5"
+          tag: "5.12.7"
           artifacts: "./*/*.zst"
-          token: ${{ secrets.auto_pkgbuild }}
+          token: ${{ secrets.GITHUB_TOKEN }}
