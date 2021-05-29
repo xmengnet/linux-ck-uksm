@@ -20,7 +20,7 @@ jobs:
       - name: Build linux-ck-uksm for debian
         run: |
           sudo apt update && sudo apt upgrade -y
-          sudo apt install git fakeroot build-essential ncurses-dev libssl-dev bc kernel-package
+          sudo apt install git fakeroot build-essential ncurses-dev libssl-dev bc kernel-package libelf-dev -y
           git clone https://github.com/antman666/auto_pkgbuild
           cd auto_pkgbuild
           wget -c https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.12.8.tar.xz
