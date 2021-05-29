@@ -62,7 +62,7 @@ jobs:
           yes "" | make oldconfig
           make -s kernelrelease > version
           
-          fakeroot make-kpkg --initrd --revision=5.12.8-ck1-uksm kernel_image kernel_headers -j40
+          fakeroot make-kpkg --initrd --revision=5.12.8 kernel_image kernel_headers -j40
 
       - uses: ncipollo/release-action@v1.6.1
         with:
