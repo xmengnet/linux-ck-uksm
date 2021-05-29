@@ -1,4 +1,4 @@
-# Maintainer:  RiverOnVenus <RiverOnVenus@gmail.com>
+# Maintainer:  antman666 <945360554@qq.com>
 # Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
 # Contributor: graysky <graysky AT archlinux DOT us>
 
@@ -6,7 +6,7 @@
 # Set the next two variables to ANYTHING that is not null to enable them
 
 # Tweak kernel options prior to a build via nconfig
-_makenconfig=
+_makenconfig=y
 
 # Only compile active modules to VASTLY reduce the number of modules built and
 # the build time.
@@ -67,8 +67,8 @@ _subarch=17
 
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
-pkgbase=linux-ck-uksm-cjktty
-pkgver=5.12.7
+pkgbase=linux-ck-uksm
+pkgver=5.12.8
 pkgrel=1
 _ckpatchversion=1
 _major=5.12
@@ -76,7 +76,7 @@ arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
 license=(GPL2)
 makedepends=(
-  bc kmod libelf        cpio perl tar xz
+  bc kmod libelf cpio perl tar xz
 )
 options=('!strip')
 _ckpatch="patch-5.12-ck${_ckpatchversion}"
@@ -93,7 +93,7 @@ validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-b2sums=('7881dceb8a88dfc290ef8e175e31f6b7cba30c1b343883344915acda6b9b20484496511f1d2d9a7e8195621db3b4c93fdc16c1d5be5cb9b685d1d8940800ab58'
+b2sums=('c2d0c2239c5b440cc93e1e0e312511497eccf9e5cef61707c7f42fa924f66defdd4275575341b46b3ee45269c705dd2ba2e2c68fb1dd4ced438b852803180ddb'
         'SKIP'
         'SKIP'
         '72194a32a06c43809d1272bd675890b6d27c6c54353150a366e8e2c50ad6eca6ee23c5d6281822965a228cfedfa07a60fe135d1b4f539e4a62728d4460cc0b0e'
