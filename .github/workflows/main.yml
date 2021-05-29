@@ -7,7 +7,7 @@ jobs:
       - name: Build linux-ck-uksm
         uses: antman666/build-aur-action@master
         with:
-          repo-name: linux-ck-uksm
+          repo-name: auto_pkgbuild
       - uses: ncipollo/release-action@v1.6.1
         with:
           allowUpdates: true
