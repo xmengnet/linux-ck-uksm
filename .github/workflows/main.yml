@@ -1,9 +1,9 @@
 name: Github Action Build PKGBUILD
 on: push
 jobs:
-  build:
+  build_for_arch:
     runs-on: ubuntu-latest
-    for_arch:
+    steps:
       - name: Build linux-ck-uksm for arch
         uses: antman666/build-aur-action@master
         with:
@@ -14,7 +14,9 @@ jobs:
           tag: "linux-5.12.8-ck1-uksm for arch"
           artifacts: "./*/*.zst"
           token: ${{ secrets.GITHUB_TOKEN }}
-    for_debian:
+  build_for_debian:
+    runs-on: ubuntu-latest
+    steps:
       - name: Build linux-ck-uksm for debian
         run: |
           sudo apt update && sudo apt upgrade -y
