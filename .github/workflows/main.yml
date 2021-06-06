@@ -34,6 +34,7 @@ jobs:
           scripts/setlocalversion --save-scmversion
           patch -Np1 < ../0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
           patch -Np1 < ../0002-UKSM.patch
+          patch -Np1 < ../0003-bfq-lucjan-r2K210602.patch
 
           cp ../config.debian .config
 
