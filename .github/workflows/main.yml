@@ -11,7 +11,7 @@ jobs:
       - uses: ncipollo/release-action@v1.8.6
         with:
           allowUpdates: true
-          tag: "linux-5.12.10-ck-uksm_for_arch"
+          tag: "linux-5.12.12-ck-uksm_for_arch"
           artifacts: "./*/*.zst"
           token: ${{ secrets.GITHUB_TOKEN }}
   build_for_debian:
@@ -23,18 +23,24 @@ jobs:
           sudo apt install git fakeroot build-essential ncurses-dev libssl-dev bc kernel-package libelf-dev -y
           git clone https://github.com/antman666/auto_pkgbuild
           cd auto_pkgbuild
-          wget -c https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.12.10.tar.xz
+          wget -c https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.12.12.tar.xz
           wget -c https://github.com/graysky2/kernel_compiler_patch/archive/20210610.tar.gz
           wget -c http://ck.kolivas.org/patches/5.0/5.12/5.12-ck1/patch-5.12-ck1.xz
-          tar -xpvf linux-5.12.10.tar.xz
+          tar -xpvf linux-5.12.12.tar.xz
           tar -xpvf 20210610.tar.gz
           xz -d patch-5.12-ck1.xz
 
-          cd linux-5.12.10
+          cd linux-5.12.12
           scripts/setlocalversion --save-scmversion
-          patch -Np1 < ../0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
-          patch -Np1 < ../0002-UKSM.patch
-          patch -Np1 < ../0003-bfq-lucjan-r2K210602.patch
+          local src
+          for src in "${source[@]}"; do
+                src="${src%%::*}"
+                src="${src##*/}"
+                [[ $src = 0*.patch ]] || continue
+                echo "Applying patch $src..."
+                patch -Np1 < "../$src"
+          done
+
 
           cp ../config.debian .config
 
@@ -63,11 +69,11 @@ jobs:
           yes "" | make oldconfig
           make -s kernelrelease > version
           
-          fakeroot make-kpkg --initrd --revision=5.12.10 --append-to-version="-ck-uksm" kernel_image kernel_headers -j40
+          fakeroot make-kpkg --initrd --revision=5.12.12 --append-to-version="-ck-uksm" kernel_image kernel_headers -j40
 
       - uses: ncipollo/release-action@v1.8.6
         with:
           allowUpdates: true
-          tag: "linux-5.12.10-ck-uksm_for_debian"
+          tag: "linux-5.12.12-ck-uksm_for_debian"
           artifacts: "./*/*.deb"
           token: ${{ secrets.GITHUB_TOKEN }}
