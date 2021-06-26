@@ -19,6 +19,7 @@ jobs:
     steps:
       - name: Build linux-ck-uksm for debian
         run: |
+          linux_ver=5.12.13
           sudo apt update && sudo apt upgrade -y
           sudo apt install git fakeroot build-essential ncurses-dev libssl-dev bc kernel-package libelf-dev -y
           git clone https://github.com/antman666/auto_pkgbuild
@@ -26,11 +27,11 @@ jobs:
           wget -c https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.12.13.tar.xz
           wget -c https://github.com/graysky2/kernel_compiler_patch/archive/20210610.tar.gz
           wget -c http://ck.kolivas.org/patches/5.0/5.12/5.12-ck1/patch-5.12-ck1.xz
-          tar -xpvf linux-5.12.13.tar.xz
+          tar -xpvf linux-${linux_ver}.tar.xz
           tar -xpvf 20210610.tar.gz
           xz -d patch-5.12-ck1.xz
 
-          cd linux-5.12.12
+          cd linux-${linux_ver}
           scripts/setlocalversion --save-scmversion
           patch -Np1 ../0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
           patch -Np1 ../0002-x86-setup-Consolidate-early-memory-reservations.patch
