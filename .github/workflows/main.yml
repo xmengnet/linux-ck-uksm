@@ -72,7 +72,7 @@ jobs:
           yes "" | make oldconfig
           make -s kernelrelease > version
           
-          fakeroot make-kpkg INSTALL_MOD_STRIP=1 LOCALVERSION=-ck-uksm KDEB_PKGVERSION=$(make kernelversion)-1 -j40 --initrd linux-image linux-headers 
+          make deb-pkg INSTALL_MOD_STRIP=1 LOCALVERSION=-ck-uksm KDEB_PKGVERSION=$(make kernelversion)-1 -j40
       - uses: ncipollo/release-action@v1.8.6
         with:
           allowUpdates: true
