@@ -1,4 +1,5 @@
 linux_ver=5.12.13
+_subarch=17
 _gcc_more_v=20210610
 _ckpatchversion=1
 _ckpatch=patch-5.12-${_ckpatchversion}
@@ -37,15 +38,17 @@ scripts/config --disable CONFIG_SCHED_DEBUG
 
 scripts/config --disable CONFIG_KVM_WERROR
 
-sed -i -re "s/^(.EXTRAVERSION).*$/\1 = /" "../patch-5.12-ck1"
+sed -i -re "s/^(.EXTRAVERSION).*$/\1 = /" "../${_ckpatch}"
 
-patch -Np1 -i ../${_ckpatch}
+patch -Np1 -i ../"${_ckpatch}"
 
 make olddefconfig
 
 patch -Np1 -i "../kernel_compiler_patch-${_gcc_more_v}/more-uarches-for-kernel-5.8+.patch"
 
-yes "" | make oldconfig
+if [[ -n "${_subarch}" ]]; then
+	yes "${_subarch}" | make oldconfig
+fi
 make -s kernelrelease > version
 
 make deb-pkg INSTALL_MOD_STRIP=1 LOCALVERSION=-ck-uksm KDEB_PKGVERSION=$(make kernelversion)-1 -j40
