@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build linux-ck-uksm for arch
-        uses: antman666/build-aur-action@master
+        uses: antman666/build-aur-action@mine
         with:
           repo-name: linux-ck1-uksm
       - uses: ncipollo/release-action@v1.8.6
@@ -19,60 +19,11 @@ jobs:
     steps:
       - name: Build linux-ck-uksm for debian
         run: |
-          linux_ver=5.12.13
           sudo apt update && sudo apt upgrade -y
           sudo apt install git fakeroot build-essential ncurses-dev libssl-dev bc kernel-package libelf-dev -y
-          git clone https://github.com/antman666/auto_pkgbuild
-          cd auto_pkgbuild
-          wget -c https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.12.13.tar.xz
-          wget -c https://github.com/graysky2/kernel_compiler_patch/archive/20210610.tar.gz
-          wget -c http://ck.kolivas.org/patches/5.0/5.12/5.12-ck1/patch-5.12-ck1.xz
-          tar -xpvf linux-${linux_ver}.tar.xz
-          tar -xpvf 20210610.tar.gz
-          xz -d patch-5.12-ck1.xz
-
-          cd linux-${linux_ver}
-          scripts/setlocalversion --save-scmversion
-          patch -Np1 ../0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
-          patch -Np1 ../0002-x86-setup-Consolidate-early-memory-reservations.patch
-          patch -Np1 ../0003-x86-setup-Merge-several-reservations-of-start-of-mem.patch
-          patch -Np1 ../0004-x86-setup-Move-trim_snb_memory-later-in-setup_arch-t.patch
-          patch -Np1 ../0005-x86-setup-always-reserve-the-first-1M-of-RAM.patch
-          patch -Np1 ../0006-x86-setup-remove-CONFIG_X86_RESERVE_LOW-and-reservel.patch
-          patch -Np1 ../0007-x86-crash-remove-crash_reserve_low_1M.patch
-          patch -Np1 ../0008-UKSM.patch
-          patch -Np1 ../0009-bbr2.patch
-          patch -Np1 ../0010-btrfs.patch
-
-
-          cp ../config.debian .config
-
-          scripts/config --disable CONFIG_DEBUG_INFO
-          scripts/config --disable CONFIG_CGROUP_BPF
-          scripts/config --disable CONFIG_BPF_LSM
-          scripts/config --disable CONFIG_BPF_PRELOAD
-          scripts/config --disable CONFIG_BPF_LIRC_MODE2
-          scripts/config --disable CONFIG_BPF_KPROBE_OVERRIDE
-
-          scripts/config --enable CONFIG_PSI_DEFAULT_DISABLED
-
-          scripts/config --disable CONFIG_LATENCYTOP
-          scripts/config --disable CONFIG_SCHED_DEBUG
-
-          scripts/config --disable CONFIG_KVM_WERROR
-
-          sed -i -re "s/^(.EXTRAVERSION).*$/\1 = /" "../patch-5.12-ck1"
-
-          patch -Np1 -i ../patch-5.12-ck1
-
-          make olddefconfig
-
-          patch -Np1 -i "../kernel_compiler_patch-20210610/more-uarches-for-kernel-5.8+.patch"
-
-          yes "" | make oldconfig
-          make -s kernelrelease > version
-          
-          make deb-pkg INSTALL_MOD_STRIP=1 LOCALVERSION=-ck-uksm KDEB_PKGVERSION=$(make kernelversion)-1 -j40
+          git clone https://github.com/antman666/linux-ck1-uksm
+          cd linux-ck1-uksm
+          bash make_kernel.sh
       - uses: ncipollo/release-action@v1.8.6
         with:
           allowUpdates: true
