@@ -1,5 +1,5 @@
-linux_ver=5.12.13
-_subarch=17
+linux_ver=5.12.14
+_subarch=36
 _gcc_more_v=20210610
 _ckpatchversion=1
 _ckpatch=patch-5.12-${_ckpatchversion}
