@@ -1,12 +1,13 @@
 linux_ver=5.12.14
 _subarch=36
 _gcc_more_v=20210610
+_major=5.12
 _ckpatchversion=1
-_ckpatch=patch-5.12-${_ckpatchversion}
+_ckpatch=patch-${_major}-${_ckpatchversion}
 
 wget -c https://www.kernel.org/pub/linux/kernel/v5.x/linux-${linux_ver}.tar.xz
 wget -c https://github.com/graysky2/kernel_compiler_patch/archive/${_gcc_more_v}.tar.gz
-wget -c http://ck.kolivas.org/patches/5.0/5.12/5.12-ck${_ckpatchversion}/$_ckpatch.xz
+wget -c http://ck.kolivas.org/patches/5.0/${_major}/${_major}-ck${_ckpatchversion}/${_ckpatch}.xz
 tar -xpvf linux-${linux_ver}.tar.xz
 tar -xpvf ${_gcc_more_v}.tar.gz
 xz -d ${_ckpatch}.xz
