@@ -69,11 +69,12 @@ _subarch=36
 
 pkgbase=linux-ck-uksm
 pkgver=5.12.14
-pkgrel=1
+pkgrel=2
 _major=5.12
 _ckpatchversion=1
 _ckpatch="patch-${_major}-ck${_ckpatchversion}"
 _gcc_more_v=20210610
+_patches_url="https://gitlab.com/sirlucjan/kernel-patches/-/raw/master/${_major}"
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
 license=(GPL2)
@@ -82,7 +83,7 @@ makedepends=(
 )
 options=('!strip')
 source=(
-  "https://www.kernel.org/pub/linux/kernel/v5.x/linux-${pkgver}.tar".{xz,sign}
+  "https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-${pkgver}.tar".{xz,sign}
   config         # the main kernel config file
   "more-uarches-${_gcc_more_v}.tar.gz::https://github.com/graysky2/kernel_compiler_patch/archive/${_gcc_more_v}.tar.gz"
   "http://ck.kolivas.org/patches/5.0/${_major}/${_major}-ck${_ckpatchversion}/${_ckpatch}.xz"
@@ -93,9 +94,11 @@ source=(
   0005-x86-setup-always-reserve-the-first-1M-of-RAM.patch
   0006-x86-setup-remove-CONFIG_X86_RESERVE_LOW-and-reservel.patch
   0007-x86-crash-remove-crash_reserve_low_1M.patch
-  0008-UKSM.patch
-  0009-bbr2.patch
-  0010-btrfs.patch
+  "0008-UKSM.patch::${_patches_url}/uksm-patches/0001-UKSM-for-5.12.patch"
+  "0009-bbr2.patch::${_patches_url}/bbr2-patches-v2/0001-bbr2-5.12-introduce-BBRv2.patch"
+  "0010-btrfs.patch::${_patches_url}/btrfs-patches-v13/0001-btrfs-patches.patch"
+  "0011-block.patch::${_patches_url}/block-patches-v6/0001-block-patches.patch"
+  "0012-bfq.patch::${_patches_url}/bfq-patches-v15/0001-bfq-patches.patch"
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -115,7 +118,9 @@ b2sums=('3bc213b432d61c358f85b932dec8bd44a1ef73442f20424ad5ce374b6982a6909c5b318
         '2251f8bf84e141b4661f84cc2ce7b21783ac0a349b2651477dfcbc5383b796b2e588d85ee411398b15c820cb3672256be8ed281c8bccfad252c9dd5b0e1e0cd5'
         '14f45171afc3b15488b40a05e58b352c5057da3a5782e13527392f7750d8e45a8db54f9b50b218fedb8bf679de3b4e5d78e230a44f7b1aa482f7b3aa831bd641'
         '0c5f2e21e27aee6c8d8eaa07daa111ff2687756413f8a909cf03acc8f836367c6b27050966f9b7bf1521ad11b84fe94fb42d70c33693c80a674ef223cf2cfc00'
-        '705a8f2037eef3afdd0f2a7648cc8d00bfc03112385b44a8907182812b6aed075519a9236909c0e3ba09df887381dd76cb01c601e0df05119136f7318587a416')
+        '705a8f2037eef3afdd0f2a7648cc8d00bfc03112385b44a8907182812b6aed075519a9236909c0e3ba09df887381dd76cb01c601e0df05119136f7318587a416'
+        '67067d624711d663c1be1d35c5e59cb588faba1769b27443a3a13b44dbe9e627edd054a4fd122d04d587e21b25be5520fffb61cfc7538aee77c33a1a8cb1b97a'
+        '9aba508592818a4b4f000fc1bd471ec74687c8f0f972f330e851bd2364eaf30cff4d5012f843625ca025bc2478a2c76e0d082d43f33358ab18ce829fab4f0c2b')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -213,7 +218,7 @@ prepare() {
 
 build() {
   cd linux-${pkgver}
-  make all
+  make -j40 all
 }
 
 _package() {
