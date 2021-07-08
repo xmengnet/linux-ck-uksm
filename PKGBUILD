@@ -6,7 +6,7 @@
 # Set the next two variables to ANYTHING that is not null to enable them
 
 # Tweak kernel options prior to a build via nconfig
-_makenconfig=y
+_makenconfig=
 
 # Only compile active modules to VASTLY reduce the number of modules built and
 # the build time.
@@ -82,28 +82,27 @@ makedepends=(
   bc kmod libelf cpio perl tar xz
 )
 options=('!strip')
-source=(
-  "https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-${pkgver}.tar".{xz,sign}
-  config         # the main kernel config file
-  "more-uarches-${_gcc_more_v}.tar.gz::https://github.com/graysky2/kernel_compiler_patch/archive/${_gcc_more_v}.tar.gz"
-  "http://ck.kolivas.org/patches/5.0/${_major}/${_major}-ck${_ckpatchversion}/${_ckpatch}.xz"
-  0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
-  0002-x86-setup-Consolidate-early-memory-reservations.patch
-  0003-x86-setup-Merge-several-reservations-of-start-of-mem.patch
-  0004-x86-setup-Move-trim_snb_memory-later-in-setup_arch-t.patch
-  0005-x86-setup-always-reserve-the-first-1M-of-RAM.patch
-  0006-x86-setup-remove-CONFIG_X86_RESERVE_LOW-and-reservel.patch
-  0007-x86-crash-remove-crash_reserve_low_1M.patch
-  "0008-UKSM.patch::${_patches_url}/uksm-patches/0001-UKSM-for-5.12.patch"
-  "0009-bbr2.patch::${_patches_url}/bbr2-patches-v2/0001-bbr2-5.12-introduce-BBRv2.patch"
-  "0010-btrfs.patch::${_patches_url}/btrfs-patches-v13/0001-btrfs-patches.patch"
-  "0011-block.patch::${_patches_url}/block-patches-v6/0001-block-patches.patch"
-  "0012-bfq.patch::${_patches_url}/bfq-patches-v15/0001-bfq-patches.patch"
-  "0013-futex2.patch::${_patches_url}/futex2-stable-patches-v7/0001-futex2-resync-from-gitlab.collabora.com.patch"
+source=("https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-${pkgver}.tar".{xz,sign}
+        config.debian         # the main kernel config file
+        "more-uarches-${_gcc_more_v}.tar.gz::https://github.com/graysky2/kernel_compiler_patch/archive/${_gcc_more_v}.tar.gz"
+        "http://ck.kolivas.org/patches/5.0/${_major}/${_major}-ck${_ckpatchversion}/${_ckpatch}.xz"
+        0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
+        0002-x86-setup-Consolidate-early-memory-reservations.patch
+        0003-x86-setup-Merge-several-reservations-of-start-of-mem.patch
+        0004-x86-setup-Move-trim_snb_memory-later-in-setup_arch-t.patch
+        0005-x86-setup-always-reserve-the-first-1M-of-RAM.patch
+        0006-x86-setup-remove-CONFIG_X86_RESERVE_LOW-and-reservel.patch
+        0007-x86-crash-remove-crash_reserve_low_1M.patch
+        "0008-UKSM.patch::${_patches_url}/uksm-patches/0001-UKSM-for-5.12.patch"
+        "0009-bbr2.patch::${_patches_url}/bbr2-patches-v2/0001-bbr2-5.12-introduce-BBRv2.patch"
+        "0010-btrfs.patch::${_patches_url}/btrfs-patches-v13/0001-btrfs-patches.patch"
+        "0011-block.patch::${_patches_url}/block-patches-v6/0001-block-patches.patch"
+        "0012-bfq.patch::${_patches_url}/bfq-patches-v15/0001-bfq-patches.patch"
+        "0013-futex2.patch::${_patches_url}/futex2-stable-patches-v7/0001-futex2-resync-from-gitlab.collabora.com.patch"
 )
 validpgpkeys=(
-  'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
-  '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
+              'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
+              '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
 b2sums=('3bc213b432d61c358f85b932dec8bd44a1ef73442f20424ad5ce374b6982a6909c5b318d5e9848996989d5e421ab6c2128cdb51a3724adc95222f96a859486a1'
         'SKIP'
@@ -145,7 +144,7 @@ prepare() {
   done
 
   echo "Setting config..."
-  cp ../config .config
+  cp ../config.debian .config
 
   # disable CONFIG_DEBUG_INFO=y at build time otherwise memory usage blows up
   # and can easily overwhelm a system with 32 GB of memory using a tmpfs build

@@ -14,6 +14,7 @@ wget -c ${_patches_url}/bbr2-patches-v2/0001-bbr2-5.12-introduce-BBRv2.patch
 wget -c ${_patches_url}/btrfs-patches-v13/0001-btrfs-patches.patch
 wget -c ${_patches_url}/block-patches-v6/0001-block-patches.patch
 wget -c ${_patches_url}/bfq-patches-v15/0001-bfq-patches.patch
+wget -c ${_patches_url}/futex2-stable-patches-v7/0001-futex2-resync-from-gitlab.collabora.com.patch
 
 tar -xpvf linux-${linux_ver}.tar.xz
 tar -xpvf ${_gcc_more_v}.tar.gz
