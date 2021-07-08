@@ -7,7 +7,7 @@ jobs:
       - name: Build linux-ck-uksm for arch
         uses: antman666/build-aur-action@mine
         with:
-          repo-name: linux-ck1-uksm
+          repo-name: linux-ck-uksm
       - uses: ncipollo/release-action@v1.8.6
         with:
           allowUpdates: true
@@ -21,7 +21,7 @@ jobs:
         run: |
           sudo apt update && sudo apt upgrade -y
           sudo apt install git fakeroot build-essential ncurses-dev libssl-dev bc kernel-package libelf-dev -y
-          git clone https://github.com/antman666/linux-ck1-uksm
+          git clone https://github.com/antman666/linux-ck-uksm
           cd linux-ck1-uksm
           bash make_kernel.sh
       - uses: ncipollo/release-action@v1.8.6
