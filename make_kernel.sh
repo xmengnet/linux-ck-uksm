@@ -17,6 +17,7 @@ wget -c ${_patches_url}/bfq-patches-v15/0001-bfq-patches.patch
 wget -c ${_patches_url}/futex2-stable-patches-v7/0001-futex2-resync-from-gitlab.collabora.com.patch
 wget -c ${_patches_url}/lru-patches-v4/0001-lru-patches.patch
 wget -c ${_patches_url}/zstd-patches-v2/0001-zstd-patches.patch
+wget -c ${_patches_url}/initramfs-patches/0001-initramfs-patches.patch
 
 tar -xpvf linux-${linux_ver}.tar.xz
 tar -xpvf ${_gcc_more_v}.tar.gz
