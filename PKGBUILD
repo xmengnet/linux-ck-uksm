@@ -69,7 +69,7 @@ _subarch=36
 
 pkgbase=linux-ck-uksm
 pkgver=5.12.16
-pkgrel=2
+pkgrel=3
 _major=5.12
 _ckpatchversion=1
 _ckpatch="patch-${_major}-ck${_ckpatchversion}"
