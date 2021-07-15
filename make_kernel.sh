@@ -1,4 +1,4 @@
-linux_ver=5.12.14
+linux_ver=5.12.16
 _subarch=30
 _gcc_more_v=20210610
 _major=5.12
@@ -14,6 +14,10 @@ wget -c ${_patches_url}/bbr2-patches-v2/0001-bbr2-5.12-introduce-BBRv2.patch
 wget -c ${_patches_url}/btrfs-patches-v13/0001-btrfs-patches.patch
 wget -c ${_patches_url}/block-patches-v6/0001-block-patches.patch
 wget -c ${_patches_url}/bfq-patches-v15/0001-bfq-patches.patch
+wget -c ${_patches_url}/futex2-stable-patches-v7/0001-futex2-resync-from-gitlab.collabora.com.patch
+wget -c ${_patches_url}/lru-patches-v4/0001-lru-patches.patch
+wget -c ${_patches_url}/zstd-patches-v2/0001-zstd-patches.patch
+wget -c ${_patches_url}/initramfs-patches/0001-initramfs-patches.patch
 
 tar -xpvf linux-${linux_ver}.tar.xz
 tar -xpvf ${_gcc_more_v}.tar.gz
@@ -59,4 +63,4 @@ if [[ -n "${_subarch}" ]]; then
 fi
 make -s kernelrelease > version
 
-make deb-pkg INSTALL_MOD_STRIP=1 LOCALVERSION=-ck-uksm KDEB_PKGVERSION=$(make kernelversion)-1 -j40
+make deb-pkg INSTALL_MOD_STRIP=1 LOCALVERSION=-ck-uksm KDEB_PKGVERSION=$(make kernelversion)-3 -j40
