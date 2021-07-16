@@ -1,4 +1,4 @@
-linux_ver=5.12.16
+linux_ver=5.12.17
 _subarch=30
 _gcc_more_v=20210610
 _major=5.12
@@ -63,4 +63,4 @@ if [[ -n "${_subarch}" ]]; then
 fi
 make -s kernelrelease > version
 
-make deb-pkg INSTALL_MOD_STRIP=1 LOCALVERSION=-ck-uksm KDEB_PKGVERSION=$(make kernelversion)-3 -j40
+make deb-pkg INSTALL_MOD_STRIP=1 LOCALVERSION=-ck-uksm KDEB_PKGVERSION=$(make kernelversion)-1 -j40
