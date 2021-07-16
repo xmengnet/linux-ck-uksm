@@ -10,9 +10,9 @@ wget -c https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-${linux_ver}.tar.xz
 wget -c https://github.com/graysky2/kernel_compiler_patch/archive/${_gcc_more_v}.tar.gz
 wget -c http://ck.kolivas.org/patches/5.0/${_major}/${_major}-ck${_ckpatchversion}/${_ckpatch}.xz
 wget -c ${_patches_url}/uksm-patches/0001-UKSM-for-5.12.patch
-wget -c ${_patches_url}/bbr2-patches-v2/0001-bbr2-5.12-introduce-BBRv2.patch
-wget -c ${_patches_url}/btrfs-patches-v13/0001-btrfs-patches.patch
-wget -c ${_patches_url}/block-patches-v6/0001-block-patches.patch
+wget -c ${_patches_url}/bbr2-patches-v3/0001-bbr2-patches.patch
+wget -c ${_patches_url}/btrfs-patches-v14/0001-btrfs-patches.patch
+wget -c ${_patches_url}/block-patches-v7/0001-block-patches.patch
 wget -c ${_patches_url}/bfq-patches-v15/0001-bfq-patches.patch
 wget -c ${_patches_url}/futex2-stable-patches-v7/0001-futex2-resync-from-gitlab.collabora.com.patch
 wget -c ${_patches_url}/lru-patches-v4/0001-lru-patches.patch
