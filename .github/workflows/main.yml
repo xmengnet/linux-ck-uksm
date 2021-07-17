@@ -11,7 +11,7 @@ jobs:
       - uses: ncipollo/release-action@v1.8.6
         with:
           allowUpdates: true
-          tag: "linux-5.12.17-ck-uksm-1_for_arch"
+          tag: "linux-5.12.17-ck-uksm-2_for_arch"
           artifacts: "./*/*.zst"
           token: ${{ secrets.GITHUB_TOKEN }}
   build_for_debian:
@@ -27,6 +27,6 @@ jobs:
       - uses: ncipollo/release-action@v1.8.6
         with:
           allowUpdates: true
-          tag: "linux-5.12.17-ck-uksm-1_for_debian"
+          tag: "linux-5.12.17-ck-uksm-2_for_debian"
           artifacts: "./*/*.deb"
           token: ${{ secrets.GITHUB_TOKEN }}
