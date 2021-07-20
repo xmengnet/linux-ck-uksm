@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Build linux-ck-uksm for debian
         run: |
-          sudo apt update && sudo apt upgrade -y
+          sudo apt update
           sudo apt install git fakeroot build-essential ncurses-dev libssl-dev bc kernel-package libelf-dev -y
           git clone https://github.com/antman666/linux-ck-uksm
           cd linux-ck-uksm
