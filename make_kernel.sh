@@ -1,5 +1,5 @@
-linux_ver=5.12.18
-linux_rel=2
+linux_ver=5.12.19
+linux_rel=1
 _subarch=30
 _gcc_more_v=20210610
 _major=5.12
