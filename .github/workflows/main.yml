@@ -11,7 +11,7 @@ jobs:
       - uses: ncipollo/release-action@v1.8.6
         with:
           allowUpdates: true
-          tag: "linux-5.12.19-ck-uksm-1_for_arch"
+          tag: "linux-5.12.19-ck-uksm-2_for_arch"
           artifacts: "./*/*.zst"
           token: ${{ secrets.GITHUB_TOKEN }}
   build_for_debian:
@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Build linux-ck-uksm for debian
         run: |
-          sudo apt update
+          sudo apt update && sudo apt upgrade -y
           sudo apt install git fakeroot build-essential ncurses-dev libssl-dev bc kernel-package libelf-dev -y
           git clone https://github.com/antman666/linux-ck-uksm
           cd linux-ck-uksm
@@ -27,6 +27,6 @@ jobs:
       - uses: ncipollo/release-action@v1.8.6
         with:
           allowUpdates: true
-          tag: "linux-5.12.19-ck-uksm-1_for_debian"
+          tag: "linux-5.12.19-ck-uksm-2_for_debian"
           artifacts: "./*/*.deb"
           token: ${{ secrets.GITHUB_TOKEN }}
