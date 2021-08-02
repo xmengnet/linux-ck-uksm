@@ -58,4 +58,4 @@ if [[ -n "${_subarch}" ]]; then
 fi
 make -s kernelrelease > version
 
-make deb-pkg INSTALL_MOD_STRIP=1 LOCALVERSION=-ck-uksm KDEB_PKGVERSION=$(make kernelversion)-${linux_rel} -j40
+make deb-pkg LOCALVERSION=-ck-uksm -j40
