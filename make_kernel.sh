@@ -4,7 +4,7 @@ _subarch=30
 _gcc_more_v=20210610
 _major=5.12
 _ckpatchversion=1
-_ckpatch=patch-${_major}-${_ckpatchversion}
+_ckpatch=patch-${_major}-ck${_ckpatchversion}
 _patches_url="https://gitlab.com/sirlucjan/kernel-patches/-/raw/master/${_major}"
 
 wget -c https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-${linux_ver}.tar.xz
