@@ -1,5 +1,6 @@
 linux_ver=5.12.19
 linux_rel=3
+name=linux-ck-uksm
 _subarch=30
 _gcc_more_v=20210610
 _major=5.12
@@ -13,6 +14,7 @@ wget -c http://ck.kolivas.org/patches/5.0/${_major}/${_major}-ck${_ckpatchversio
 wget -c ${_patches_url}/uksm-patches/0001-UKSM-for-5.12.patch
 wget -c ${_patches_url}/bbr2-patches-v3/0001-bbr2-patches.patch
 wget -c ${_patches_url}/lru-patches-v4/0001-lru-patches.patch
+wget -c ${_patches_url}/block-patches-v7/0001-block-patches.patch
 
 tar -xpvf linux-${linux_ver}.tar.xz
 tar -xpvf ${_gcc_more_v}.tar.gz
@@ -20,6 +22,8 @@ xz -d ${_ckpatch}.xz
 
 cd linux-${linux_ver}
 scripts/setlocalversion --save-scmversion
+echo "-$linux_rel" > localversion.10-pkgrel
+echo "${name#linux}" > localversion.20-pkgname
 local src
 for src in "${source[@]}"; do
   	src="${src%%::*}"
