@@ -30,3 +30,19 @@ jobs:
           tag: "linux-5.12.19-ck-uksm-3_for_debian"
           artifacts: "./*/*.deb"
           token: ${{ secrets.GITHUB_TOKEN }}
+  build_for_debian_old:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build linux-ck-uksm for debian
+        run: |
+          sudo apt update && sudo apt upgrade -y
+          sudo apt install git fakeroot build-essential ncurses-dev libssl-dev bc kernel-package libelf-dev -y
+          git clone https://github.com/antman666/linux-ck-uksm
+          cd linux-ck-uksm
+          bash make_kernel_old.sh
+      - uses: ncipollo/release-action@v1.8.6
+        with:
+          allowUpdates: true
+          tag: "linux-5.12.19-ck-uksm-3_for_old_debian"
+          artifacts: "./*/*.deb"
+          token: ${{ secrets.GITHUB_TOKEN }}
