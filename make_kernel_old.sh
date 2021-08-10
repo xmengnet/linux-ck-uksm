@@ -1,6 +1,6 @@
 linux_ver=5.12.19
 linux_rel=3
-name=linux-ck-uksm
+name=linux-ck-uksm-old
 _subarch=30
 _gcc_more_v=20210610
 _major=5.12
@@ -62,4 +62,4 @@ if [[ -n "${_subarch}" ]]; then
 fi
 make -s kernelrelease > version
 
-make deb-pkg LOCALVERSION=-ck-uksm -j40
+make deb-pkg LOCALVERSION=-ck-uksm-old -j40
