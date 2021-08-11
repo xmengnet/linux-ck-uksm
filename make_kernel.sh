@@ -24,8 +24,7 @@ cd linux-${linux_ver}
 scripts/setlocalversion --save-scmversion
 echo "-$linux_rel" > localversion.10-pkgrel
 echo "${name#linux}" > localversion.20-pkgname
-local src
-for src in "${source[@]}"; do
+for src in $(ls ..); do
   	src="${src%%::*}"
   	src="${src##*/}"
   	[[ $src = 0*.patch ]] || continue
@@ -62,4 +61,4 @@ if [[ -n "${_subarch}" ]]; then
 fi
 make -s kernelrelease > version
 
-make deb-pkg LOCALVERSION=-ck-uksm KDEB_PKGVERSION=$(make kernelversion)-${linux_rel} -j40
+make deb-pkg KDEB_PKGVERSION=$(make kernelversion)-${linux_rel} -j40
