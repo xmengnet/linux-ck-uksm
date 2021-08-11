@@ -62,4 +62,4 @@ if [[ -n "${_subarch}" ]]; then
 fi
 make -s kernelrelease > version
 
-make deb-pkg LOCALVERSION=-ck-uksm -j40
+make deb-pkg LOCALVERSION=-ck-uksm KDEB_PKGVERSION=$(make kernelversion)-${linux_rel} -j40
