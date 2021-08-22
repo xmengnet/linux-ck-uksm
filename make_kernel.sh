@@ -2,7 +2,7 @@ linux_ver=5.12.19
 linux_rel=3
 name=linux-ck-uksm
 _subarch=30
-_gcc_more_v=20210610
+_gcc_more_v=20210818
 _major=5.12
 _ckpatchversion=1
 _ckpatch=patch-${_major}-ck${_ckpatchversion}
@@ -58,7 +58,10 @@ patch -Np1 -i "../kernel_compiler_patch-${_gcc_more_v}/more-uarches-for-kernel-5
 
 if [[ -n "${_subarch}" ]]; then
 	yes "${_subarch}" | make oldconfig
+else
+    make oldconfig
 fi
+
 make -s kernelrelease > version
 
 make deb-pkg KDEB_PKGVERSION=$(make kernelversion)-${linux_rel} -j40
